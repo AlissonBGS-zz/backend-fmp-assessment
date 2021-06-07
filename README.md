@@ -21,6 +21,9 @@ The api will run locally at port 8080 (```localhost:8080```) and there's 3 possi
 - ```/services``` - get all services on the database
 - ```/services/{id}``` - get one especific service by ID
 - ```/clients/create``` - create a client 
+
+You can see the complete documentation using swagger:
+Copy the `swagger.json` file content and paste on swagger editor (`https://editor.swagger.io/`)
   
 # Help
 You can check the all make commands by running ```make help```
