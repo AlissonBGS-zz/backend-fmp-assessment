@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20210601204711 extends AbstractMigration
 {
     public function getDescription(): string
@@ -26,9 +23,9 @@ final class Version20210601204711 extends AbstractMigration
         $services = (Object) [
             (Object)[
                 "name" => "Resume Writing",
-                "slug" => "resume_writing",
+                "slug" => "resume-writing",
                 "description" => "Our resume writers have experience in 85+ different career types and we match you with a writer based on relevant experience.",
-                "tiers" => (Object)[
+                "tiers" => [
                     "Basic" => 200,
                     "Professional" => 500,
                     "Executive" => 1000,
@@ -36,9 +33,9 @@ final class Version20210601204711 extends AbstractMigration
             ],
             (Object)[
                 "name" => "Carrer Coaching",
-                "slug" => "carrer_coaching",
+                "slug" => "carrer-coaching",
                 "description" => "Our professional career coaching services are provided by former recruiters, headhunters, and/or executive resume writers only. We ensure the absolute highest quality of career coaches and will always do our best to match you with the career coach that we feel is right for you.",
-                "tiers" => (Object)[
+                "tiers" => [
                     "Basic" => 400,
                     "Professional" => 500,
                     "Executive" => 700,
@@ -46,9 +43,9 @@ final class Version20210601204711 extends AbstractMigration
             ],
             (Object)[
                 "name" => "Likedin profile update",
-                "slug" => "linkedin_update",
+                "slug" => "linkedin-profile-update",
                 "description" => "LinkedIn is an ever-changing professional social network. They offer a ton of great tools to help you find jobs, and more importantly, find the people you need to network with in order to land that dream job.",
-                "tiers" => (Object)[
+                "tiers" => [
                     "Basic" => 100,
                     "Professional" => 150,
                     "Executive" => 300,
@@ -64,7 +61,6 @@ final class Version20210601204711 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE clients');
         $this->addSql('DROP TABLE services');
     }

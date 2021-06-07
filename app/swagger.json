@@ -1,0 +1,181 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This simple API was created for the Find My Profession assessment. It's possible to consume the services of the application and insert clients in the database",
+      "version": "1.0.0",
+      "title": "Find My Profession assessment",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "alissonbgs97@gmail.com"
+      }
+    },
+    "host": "localhost:8080",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/services": {
+        "get": {
+          "tags": [
+            "Services"
+          ],
+          "summary": "Return the list of services.",
+          "description": "",
+          "operationId": "addPet",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Services successfully listed"
+            },
+            "500": {
+              "description": "Internal error"
+            }
+          }
+        }
+      },
+      "/services/{slug}": {
+        "get": {
+          "tags": [
+            "Services"
+          ],
+          "summary": "Return service informations by service slug",
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "slug",
+              "description": "Slug is needed to find the service",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Service successfully listed"
+            },
+            "404": {
+              "description": "Service not found"
+            },
+            "500": {
+              "description": "Internal error"
+            }
+          }
+        }
+      },
+      "/clients/create": {
+        "post": {
+          "tags": [
+            "Client"
+          ],
+          "summary": "Create client",
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Created client object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Client"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "client successfully created"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "409": {
+              "description": "Email already registered"
+            },
+            "500": {
+              "description": "Internal error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Services": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tiers": {
+            "type": "object",
+            "description": "tier of service"
+          }
+        }
+      },
+      "Client": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "tier": {
+            "type": "string"
+          },
+          "payment_type": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "object": {
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }

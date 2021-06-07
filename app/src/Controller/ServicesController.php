@@ -15,17 +15,6 @@ class ServicesController extends AbstractController
     /**
      * @Route("/services", name="services")
      */
-    public function index(): Response
-    {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ServicesController.php',
-        ]);
-    }
-
-    /**
-     * @Route("/allServices", name="allServices")
-     */
     public function getServices(Request $request): Response {
         try {
             $service_repository = $this->getDoctrine()->getRepository(Services::class);
@@ -52,26 +41,37 @@ class ServicesController extends AbstractController
             ];
         }
 
-        return new Response(json_encode($response));
+        return new Response(
+            json_encode($response),
+            Response::HTTP_OK,
+            ['content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*']
+        );
     }
 
     /**
-     * @Route("/service/{id}", name="service")
+     * @Route("/services/{slug}", name="service")
      */
-    public function getService(int $id): Response {
+    public function getService(string $slug): Response {
         try {
             $service_repository = $this->getDoctrine()->getRepository(Services::class);
-            $service = $service_repository->find($id);
+            $service = $service_repository->findOneBy(['slug' => $slug]);
     
-            $response = [
-                'status_code' => 200,
-                'service' => [
-                    'name' => $service->getName(),
-                    'slug' => $service->getSlug(),
-                    'description' => $service->getDescription(),
-                    'tiers' => $service->getTiers(),
-                ]
-            ];
+            if($service){
+                $response = [
+                    'status_code' => 200,
+                    'service' => [
+                        'name' => $service->getName(),
+                        'slug' => $service->getSlug(),
+                        'description' => $service->getDescription(),
+                        'tiers' => $service->getTiers(),
+                    ]
+                ];
+            }else{
+                $response = [
+                    'status_code' => 404,
+                    'msg' => 'Service not found!',
+                ];
+            }
         } catch (Exception $e) {   
             $response = [
                 'status_code' => 500,
@@ -79,6 +79,10 @@ class ServicesController extends AbstractController
             ];
         }
         
-        return new Response(json_encode($response));
+        return new Response(
+            json_encode($response),
+            Response::HTTP_OK,
+            ['content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'] 
+        );
     }
 }
