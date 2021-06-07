@@ -18,8 +18,8 @@ After doing this, your api must be ready to be used.
 
 # API Usage:
 The api will run locally at port 8080 (```localhost:8080```) and there's 3 possible routes:
-- ```/allServices``` - get all services on the database
-- ```/service/{id}``` - get one especific service by ID
+- ```/services``` - get all services on the database
+- ```/services/{id}``` - get one especific service by ID
 - ```/clients/create``` - create a client 
   
 # Help
